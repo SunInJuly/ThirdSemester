@@ -6,7 +6,7 @@
 class Linux : public OS
 {
 public:
-    Linux();
+    Linux(int number);
     string sistemType();
 };
 

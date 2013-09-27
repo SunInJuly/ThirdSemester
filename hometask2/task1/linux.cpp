@@ -1,8 +1,8 @@
 #include "linux.h"
 
-Linux::Linux()
+Linux::Linux(int number)
 {
-    security = 5;
+   security = number;
 }
 
 string Linux::sistemType()

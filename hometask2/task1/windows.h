@@ -5,7 +5,7 @@
 class Windows : public OS
 {
 public:
-    Windows();
+    Windows(int number);
     string sistemType();
 };
 

@@ -8,14 +8,14 @@ Computer::Computer()
     switch (x)
     {
     case (0):
-        sistem = new Windows ();
+        sistem = new Windows (30);
         break;
     case(1):
-        sistem = new Mac ();
+        sistem = new Mac (20);
         break;
 
     case(2):
-        sistem = new Linux ();
+        sistem = new Linux (50);
         break;
     }
     x = rand () % 5;
@@ -24,9 +24,13 @@ Computer::Computer()
     else
         infected = false;
 
-
+    virus = 0;
 }
 
+void Computer::setVirusStrength(int value)
+{
+    virus = value;
+}
 bool Computer::isInfected()
 {
     return infected;
@@ -38,10 +42,14 @@ bool Computer::refer()
 
 bool Computer::attacked ()
 {
-    int res = rand() % 8;
-    if (res > sistem->securityLevel())
+
+    if (virus > sistem->securityLevel())
         infected = true;
     return infected;
+}
+void Computer::setSecuruty(int value)
+{
+    sistem->setSecurity(value);
 }
 
 string Computer::sistemType()

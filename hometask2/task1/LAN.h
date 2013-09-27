@@ -2,7 +2,9 @@
 #define LAN_H
 #include "computer.h"
 #include <iostream>
+#include <fstream>
 #include <time.h>
+#include <QList>
 
 using namespace std;
 
@@ -21,11 +23,15 @@ public:
     bool isWorkable ();
     void logOutStatus();
 private:
-    Computer users[size];
+    void informationFromFile();
+    int connections[size][size];
+    Computer * users[size];
     void connect (int firstId, int secondId);
     int attacking;
     int attacked;
     bool success;
+    QList<int> * infected;
+
 
 };
 

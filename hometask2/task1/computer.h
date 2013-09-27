@@ -21,9 +21,12 @@ public:
     string sistemType();
     string infectionStatus();
     bool isInfected();
+    void setSecuruty(int value);
+    void setVirusStrength(int value);
 private:
     bool infected;
     OS * sistem;
+    int virus;
 };
 
 #endif // COMPUTER_H

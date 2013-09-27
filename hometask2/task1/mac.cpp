@@ -1,8 +1,8 @@
 #include "mac.h"
 
-Mac::Mac()
+Mac::Mac(int number)
 {
-    security = 4;
+    security = number;
 }
 
 string Mac::sistemType()

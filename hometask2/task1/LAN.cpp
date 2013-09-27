@@ -1,3 +1,4 @@
+
 #include "LAN.h"
 
 LAN::LAN()
@@ -5,29 +6,63 @@ LAN::LAN()
     srand( (unsigned)time( NULL ) );
     attacking = -1;
     attacked = -1;
-    bool success = false;
-    int x = rand() % 6;
+    success = false;
+    int x = rand() % size;
+    for(int i = 0; i < size; i++)
+    {
+        users[i] = new Computer();
+    }
     do
     {
-        users[x].attacked();
+        users[x]->attacked();
     }
-    while (!users[x].isInfected());
+    while (!users[x]->isInfected());
+    infected = new QList<int>;
+    infected->append(x);
+    informationFromFile();
 }
+
+void LAN::informationFromFile()
+{
+    ifstream file;
+    file.open("network.txt");
+    int x;
+
+
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = 0; j < size; j++)
+        {
+            file >> x;
+            connections[i][j] = x;
+
+        }
+
+    }
+
+}
+
 
 void LAN::turn()
 {
-
-    int first = rand () % 6;
-    int second;
-    do
+    int first, second;
+    for (int i = 0; i < infected->size(); i++)
     {
-        second = rand () % 6;
+        first = infected->operator [](i);
+
+        for (int j = 0; j < size; j++)
+         {
+            if(connections[first][j] != 0)
+            {
+                second = i;
+                connect(first, second);
+                if (users[i]->isInfected())
+                    infected->append(i);
+            }
+        }
     }
-    while (second == first);
 
-    connect(first, second);
     logOutStatus();
-
 }
 
 void LAN::connect(int firstId, int secondId)
@@ -35,12 +70,11 @@ void LAN::connect(int firstId, int secondId)
     success = false;
     attacking = firstId;
     attacked = secondId;
-    if (users[firstId].refer())
+    if (users[firstId]->refer())
     {
-        if (users[secondId].attacked())
+        users[firstId]->setVirusStrength(rand() % 100);
+        if (users[secondId]->attacked())
             success = true;
-
-
     }
 
 }
@@ -57,7 +91,7 @@ void LAN::logOutStatus()
     }
     for (int i = 0; i < size; i++)
     {
-        cout << "Computer number " << i << " " << users[i].sistemType() << " " << users[i].infectionStatus() << endl;
+        cout << "Computer number " << i << " " << users[i]->sistemType() << " " << users[i]->infectionStatus() << endl;
     }
 
 }
@@ -66,7 +100,7 @@ bool LAN::isWorkable()
 {
     for (int i = 0; i < size; i++)
     {
-        if (!users[i].isInfected())
+        if (!users[i]->isInfected())
             return true;
     }
     return false;

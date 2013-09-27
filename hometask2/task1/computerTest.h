@@ -23,14 +23,26 @@ private slots:
     {
         QVERIFY(!pc->isInfected());
     }
-    void infect()
+    void unsuccessfullAttack()
     {
-        do
-        {
-            pc->attacked();
-        }
-        while (!pc->isInfected());
 
+        pc->setSecuruty(100);
+        pc->setVirusStrength(60);
+        pc->attacked();
+        QVERIFY(!pc->isInfected());
+    }
+    void successfulAttack()
+    {
+        pc->setSecuruty(0);
+        pc->setVirusStrength(60);
+        pc->attacked();
+        QVERIFY(pc->isInfected());
+    }
+    void infectionCorrect()
+    {
+        pc->setSecuruty(50);
+        pc->setVirusStrength(60);
+        pc->attacked();
         QVERIFY(pc->isInfected());
     }
 

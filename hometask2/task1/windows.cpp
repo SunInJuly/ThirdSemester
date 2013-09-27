@@ -1,8 +1,8 @@
 #include "windows.h"
 
-Windows::Windows()
+Windows::Windows(int number)
 {
-    security = 3;
+    security = number;
 }
 
 string Windows::sistemType()

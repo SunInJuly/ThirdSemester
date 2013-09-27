@@ -6,7 +6,7 @@
 class Mac : public OS
 {
 public:
-    Mac();
+    Mac(int number);
     string sistemType();
 };
 

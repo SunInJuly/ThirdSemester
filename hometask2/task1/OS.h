@@ -11,11 +11,11 @@ using namespace std;
 class OS
 {
 public:
-    OS();
+    //OS(int number);
     virtual string sistemType() = 0;
     int securityLevel();
+    void setSecurity(int level);
 protected:
-
     int security;
 };
 
