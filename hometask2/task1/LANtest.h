@@ -1,5 +1,5 @@
-#include <QtCore/QObject>
-#include <QtTest/QtTest>
+#include <QObject>
+#include <QTest>
 #include "LAN.h"
 
 

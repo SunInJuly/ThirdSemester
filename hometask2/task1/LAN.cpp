@@ -8,15 +8,15 @@ LAN::LAN()
     attacked = -1;
     success = false;
     int x = rand() % size;
+
     for(int i = 0; i < size; i++)
     {
         users[i] = new Computer();
     }
-    do
-    {
-        users[x]->attacked();
-    }
-    while (!users[x]->isInfected());
+
+
+    users[x]->setSecuruty(0);
+    users[x]->attacked();
     infected = new QList<int>;
     infected->append(x);
     informationFromFile();

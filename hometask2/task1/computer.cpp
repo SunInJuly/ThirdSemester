@@ -18,13 +18,9 @@ Computer::Computer()
         sistem = new Linux (50);
         break;
     }
-    x = rand () % 5;
-    if (x == 1)
-        infected = true;
-    else
-        infected = false;
+    infected = false;
 
-    virus = 0;
+    virus = rand () % 100 - 10;
 }
 
 void Computer::setVirusStrength(int value)

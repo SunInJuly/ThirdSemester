@@ -1,25 +1,35 @@
-TEMPLATE = app
-#CONFIG += console
-#CONFIG -= qt
+#-------------------------------------------------
+#
+# Project created by QtCreator 2013-09-30T20:54:49
+#
+#-------------------------------------------------
 
-CONFIG   += console qtestlib
 QT       += core
 
+QT += testlib
+
+TARGET = task1
+CONFIG   += console
+CONFIG   -= app_bundle
+
+TEMPLATE = app
+
+
 SOURCES += main.cpp \
-    LAN.cpp \
-    computer.cpp \
+    windows.cpp \
     OS.cpp \
     mac.cpp \
     linux.cpp \
-    windows.cpp
+    LAN.cpp \
+    computer.cpp
 
 HEADERS += \
-    LAN.h \
-    computer.h \
+    windows.h \
     OS.h \
     mac.h \
     linux.h \
-    windows.h \
     LANtest.h \
-    computerTest.h
+    LAN.h \
+    computerTest.h \
+    computer.h
 

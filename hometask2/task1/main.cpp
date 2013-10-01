@@ -2,11 +2,15 @@
 #include "LAN.h"
 #include "LANtest.h"
 #include "computerTest.h"
+#include <QCoreApplication>
+
 
 using namespace std;
 
-int main()
+int main(int argc, char *argv[])
 {
+    QCoreApplication a(argc, argv);
+
     LANtest test;
     QTest::qExec(&test);
     ComputerTest test1;
@@ -32,9 +36,8 @@ int main()
 
     if(!network->isWorkable())
         cout << "All computers are infected!" << endl;
-
-
-
+    std::cout<< "ss";
+    return a.exec();
 
 }
 
