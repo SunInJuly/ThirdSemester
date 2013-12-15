@@ -43,7 +43,7 @@ bool Computer::attacked ()
         infected = true;
     return infected;
 }
-void Computer::setSecuruty(int value)
+void Computer::setSecurity(int value)
 {
     sistem->setSecurity(value);
 }

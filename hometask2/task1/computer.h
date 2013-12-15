@@ -21,7 +21,7 @@ public:
     string sistemType();
     string infectionStatus();
     bool isInfected();
-    void setSecuruty(int value);
+    void setSecurity(int value);
     void setVirusStrength(int value);
 private:
     bool infected;

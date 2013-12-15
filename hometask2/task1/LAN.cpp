@@ -1,7 +1,7 @@
 
 #include "LAN.h"
 
-LAN::LAN()
+LAN::LAN(string& filename)
 {
     srand( (unsigned)time( NULL ) );
     attacking = -1;
@@ -14,20 +14,37 @@ LAN::LAN()
         users[i] = new Computer();
     }
 
-
-    users[x]->setSecuruty(0);
-    users[x]->attacked();
+    informationFromFile(filename);
+    users[0]->setSecurity(0);
+    users[0]->attacked();
     infected = new QList<int>;
-    infected->append(x);
-    informationFromFile();
-}
+    infected->append(0);
 
-void LAN::informationFromFile()
+}
+void LAN::configureSecurityFromFile(string & filename)
+{
+    int security;
+    int virus;
+    ifstream file;
+    file.open(filename.c_str());
+    for(int i = 0; i < size; i++)
+    {
+        file >> security;
+        file >> virus;
+        users[i]->setSecurity(security);
+        users[i]->setVirusStrength(virus);
+    }
+
+}
+void LAN::informationFromFile(string& filename)
 {
     ifstream file;
-    file.open("network.txt");
+    file.open(filename.c_str());
     int x;
-
+    if(!file)
+    {
+        cout << "Error! File not found"<< endl;
+    }
 
     for (int i = 0; i < size; i++)
     {
@@ -54,10 +71,10 @@ void LAN::turn()
          {
             if(connections[first][j] != 0)
             {
-                second = i;
+                second = j;
                 connect(first, second);
-                if (users[i]->isInfected())
-                    infected->append(i);
+                if (users[i]->isInfected()&&(!infected->contains(j)))
+                    infected->append(j);
             }
         }
     }
@@ -72,7 +89,7 @@ void LAN::connect(int firstId, int secondId)
     attacked = secondId;
     if (users[firstId]->refer())
     {
-        users[firstId]->setVirusStrength(rand() % 100);
+        //users[firstId]->setVirusStrength(rand() % 100);
         if (users[secondId]->attacked())
             success = true;
     }
@@ -100,7 +117,7 @@ bool LAN::isWorkable()
 {
     for (int i = 0; i < size; i++)
     {
-        if (!users[i]->isInfected())
+        if (!infected->contains(i))
             return true;
     }
     return false;

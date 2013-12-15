@@ -10,13 +10,14 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-
-    LANtest test;
-    QTest::qExec(&test);
     ComputerTest test1;
     QTest::qExec(&test1);
+    LANtest test;
+    QTest::qExec(&test);
+
     char menu = 't';
-    LAN * network = new LAN();
+    string file = "network.txt";
+    LAN * network = new LAN(file);
 
 
     network->logOutStatus();

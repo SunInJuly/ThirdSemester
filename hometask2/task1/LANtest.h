@@ -10,11 +10,16 @@ public:
     explicit LANtest(QObject *parent = 0) : QObject(parent) {}
 private:
     LAN * network;
+    LAN * network2;
 
 private slots:
     void init()
     {
-        network = new LAN();
+
+        string name = "network.txt";
+        network = new LAN(name);
+        string file = "security.txt";
+        network->configureSecurityFromFile(file);
     }
     void cleanup()
     {
@@ -28,6 +33,23 @@ private slots:
     {
         network->turn();
         QVERIFY(network->isWorkable());
+    }
+    void infectionTest()
+    {
+
+        for (int i = 0; i < 5; i++)
+        {
+            network->turn();
+        }
+        QVERIFY(network->isWorkable());
+
+    }
+    void infectionTest2()
+    {
+        string security = "security2.txt";
+        network->configureSecurityFromFile(security);
+            network->turn();
+        QVERIFY(!network->isWorkable());
     }
 
 

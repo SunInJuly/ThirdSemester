@@ -18,12 +18,13 @@ const int size = 6;
 class LAN
 {
 public:
-    LAN();
+    LAN(string& filename);
     void turn();
     bool isWorkable ();
     void logOutStatus();
+    void configureSecurityFromFile(string & filename);
 private:
-    void informationFromFile();
+    void informationFromFile(string &filename);
     int connections[size][size];
     Computer * users[size];
     void connect (int firstId, int secondId);
