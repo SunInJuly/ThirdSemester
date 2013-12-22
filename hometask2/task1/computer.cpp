@@ -19,12 +19,13 @@ Computer::Computer()
         break;
     }
     infected = false;
-
+    set = false;
     virus = rand () % 100 - 10;
 }
 
 void Computer::setVirusStrength(int value)
 {
+    set = false;
     virus = value;
 }
 bool Computer::isInfected()
@@ -38,7 +39,8 @@ bool Computer::refer()
 
 bool Computer::attacked ()
 {
-
+    if(!set)
+        virus = rand () % 100 - 10;
     if (virus > sistem->securityLevel())
         infected = true;
     return infected;

@@ -24,6 +24,7 @@ public:
     void setSecurity(int value);
     void setVirusStrength(int value);
 private:
+    bool set;
     bool infected;
     OS * sistem;
     int virus;
